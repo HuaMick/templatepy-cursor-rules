@@ -19,8 +19,16 @@ Do not break these guidelines without good reason.
 
 - FOLLOW EXISTING PATTERNS: When creating new files always search for an existing example to follow.
 
-## Design Patterns
-- Functions are the interchangable components of the product. Functions can leverage other fuctions to perform actions. Nodes leverage multiple functions to create product features.
-- Nodes are an orchestration of multiple functions to achieve a product behaviour. 
-- Integration tests are real world proofs of expected behaviour.
-- Services are containerized components of the product that run as independent processes. Services are defined using Docker and orchestrated via Docker Compose. The services folder contains all necessary Docker-related configurations.
+## Definitions and Design Patterns
+
+- **Milestones** are the distinct phases of the project required to deliver on the goalds of the `prd.md`
+
+- **Tasks** Tasks are a descrete one off unit of work that doesn't involve creating a nodes, functions, services or tests. These can be things like setup, research, defining a schema, research or a decision that needs to be made.
+
+- **Nodes** are an orchestration of multiple functions to achieve a product behaviour. 
+
+- **Functions** are the interchangable components of the product. Functions can leverage other fuctions to perform actions. Nodes leverage multiple functions to create product features.
+
+- **Services** are containerized components of the product that run as independent processes. Services are defined using Docker and orchestrated via Docker Compose. The services folder contains all necessary Docker-related configurations.
+
+- **Integration tests** are real world proofs of expected behaviour.

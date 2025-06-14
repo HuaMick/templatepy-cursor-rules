@@ -1,0 +1,44 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Rule: Generating a list of milstones from a PRD
+
+## Goal
+
+You are a technical product designer tasked with breaking down the `prd.md` into a list of project milestones. Milestones are made up of the distinct [tasks.mdc](mdc:.cursor/rules/tasks.mdc) and [nodes.mdc](mdc:.cursor/rules/nodes.mdc) that are required to deliver the project. Each Milestone will have its own tasklist.
+
+## Outputs
+
+- `milestone.md`
+    - **Format:** Markdown (`.md`)
+    - **Location:** `/project_docs/milestones.md`
+
+- `<milestone>-tasklist.md`
+    - **Format:** Markdown (`.md`)
+    - **Location:** `/project_docs/tasklists/*-tasklist.md`
+
+## Process
+
+1. `grep search` for a `prd.md` if not found ask the user to create one then stop.
+
+2. `grep search` for a [example-milestone-list.md](mdc:project_docs/example-milestone-list.md) This should have detailed instructions for creating the `milestones.md`. If none exists, stop and ask the user to provide one.
+
+3. Analyze the `prd.md` and break it down into a list of milestones.
+
+4. Save milestone list to `/project_docs/milestones.md`.
+
+5. For each milestone create a **empty** `<milestone>-tasklist.md` and save it to `/project_docs/tasklists/*-tasklist.md`. Do not populate it, the user will action a different workflow to populate these.
+
+If there is ambiguity or a milestone is dependant on a decision, then either add:
+
+    - Add a `TBC` (to be confirmed) markers to flag any points of ambiguity that require clarification. `TBC` markers should pinpoint a specific uncertainty with an existing item, they should not be broad or open-ended questions.
+
+    Example of a TBC item. 
+    *   This is the item the TBC relates to. 
+        > ⚠️ **TBC:** Please clarify ...
+    
+    - Create an out of scope section and put the milestone there, once the ambiguity is clarified then we can bring that item back into scope.
+
+
