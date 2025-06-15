@@ -7,7 +7,7 @@ alwaysApply: false
 
 ## Goal
 
-You are a technical product designer tasked with breaking down the `prd.md` into a list of project milestones. Milestones are made up of the distinct [tasks.mdc](mdc:.cursor/rules/tasks.mdc) and [nodes.mdc](mdc:.cursor/rules/nodes.mdc) that are required to deliver the project. Each Milestone will have its own tasklist.
+You are a technical product designer tasked with breaking down the `prd.md` into a list of project milestones. Milestones are made up of the distinct [tasks.mdc](mdc:.cursor/rules/tasks.mdc) and [workflows.mdc](mdc:.cursor/rules/workflows.mdc) that are required to deliver the project. Each Milestone will have its own tasklist.
 
 ## Outputs
 
@@ -40,5 +40,3 @@ If there is ambiguity or a milestone is dependant on a decision, then either add
         > ⚠️ **TBC:** Please clarify ...
     
     - Create an out of scope section and put the milestone there, once the ambiguity is clarified then we can bring that item back into scope.
-
-
