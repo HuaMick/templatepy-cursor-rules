@@ -1,5 +1,32 @@
 ---
-description:
-globs:
+description: 
+globs: 
 alwaysApply: false
 ---
+# Rule: Populating the Task Lists for each milestone
+
+## Goal
+
+You are a technical writer tasked with breaking down the `milestones.md` into separate task lists. The task list are designed to guide junior developers and AI assistants in developing a product that delivers on the requirments of the PRD.
+
+## Outputs
+
+- `<milestone>-tasklist.md`
+    - **Format:** Markdown (`.md`)
+    - **Location:** `/project_docs/tasklists/*-tasklist.md`
+
+## Process
+
+1. `grep search` for a `milestones.md` if not found ask the user to create one then stop.
+
+2. `grep search` for a [example-task-list.md](mdc:project_docs/tasklists/example-task-list.md) This should have detailed instructions for creating each `*-tasklist.md`. If none exists, stop and ask the user to provide one.
+
+3. Analyze the `prd.md` and the `milstones.md`. 
+
+4. For each milestone `grep search` for an existing `<milestone>-tasklist.md` if none exists generate one using the [example-task-list.md](mdc:project_docs/tasklists/example-task-list.md) otherwise update the existing one.
+
+5. Review each tasklist generated or updated, review it and remove any redundancies. For example a function created earlier that can be leveraged in a downstream milestone so it doesnt need to be created again.
+
+## Guidelines
+*Descriptions should be concise, short and describe how the function is leveraged by the node, or how the node/task helps deliver the milestone.*
+*Create classes sparingly and give strong preference to creating functions instead. Classes should only be created when they provide clear benefits such as encapsulation of related state and behavior, or when implementing interfaces. Favor functional approaches and pure functions where possible.*
