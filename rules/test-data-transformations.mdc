@@ -1,0 +1,81 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+
+### Testing BigQuery Table Transformations
+
+When testing functions or workflows that transform data from one BigQuery table to another, it's crucial to create a controlled and isolated test environment. This ensures tests are deterministic, fast, and don't pollute your development or production datasets.
+
+The standard pattern for this is as follows:
+
+1.  **Create a Temporary Source Table**: Instead of running against a full production table, create a small, temporary source table containing only the data needed for the test. This is typically done by selecting a limited number of rows (e.g., 10-20) from the real source table that match the specific conditions (`predicates`) of your test.
+2.  **Execute the Transformation**: Run your function or workflow, pointing it to the temporary source table you just created. Configure it to write its output to a new, temporary destination table.
+3.  **Query and Assert**: After the transformation is complete, query the temporary destination table. Perform assertions on the results to verify the transformation worked as expected. This can include checking the number of rows, validating calculations, or confirming schema changes. Print the head of the resulting table to the console for easy debugging.
+4.  **Clean Up**: Use a `try...finally` block to ensure that both the temporary source and destination tables are deleted after the test runs, regardless of whether it passed or failed.
+
+This approach provides high confidence that your transformation logic is correct while keeping the test suite clean and maintainable.
+
+**Example Pytest Implementation:**
+
+```python
+import pytest
+from google.cloud import bigquery
+from src.config.config import DATASETS
+from src.functions.my_transformation import my_transformation_function
+from tests.fixtures.bq_client import bq_client # Assuming a client fixture
+
+def test_my_table_transformation(bq_client: bigquery.Client):
+    """
+    Integration test for a BigQuery table transformation.
+    """
+    # --- 1. Setup ---
+    original_source_table = DATASETS["training"]["source_table"]
+    predicates = DATASETS["training"]["predicates"]
+    batch_size = 10
+
+    test_source_table = "my_dataset.test_source_table"
+    test_destination_table = "my_dataset.test_destination_table"
+
+    try:
+        # --- 2. Create Temporary Source Table ---
+        print(f"\n🚀 Creating temporary source table: {test_source_table}")
+        where_clause = predicates.strip().lstrip("AND").strip()
+        create_source_sql = f"""
+        CREATE OR REPLACE TABLE `{test_source_table}` AS
+        SELECT * FROM `{original_source_table}`
+        WHERE {where_clause}
+        LIMIT {batch_size}
+        """
+        bq_client.query(create_source_sql).result()
+        print("✅ Temporary source table created.")
+
+        # --- 3. Execute Transformation ---
+        # This function reads from test_source_table and writes to test_destination_table
+        result = my_transformation_function(
+            source_table=test_source_table,
+            destination_table=test_destination_table,
+            client=bq_client
+        )
+        assert result["success"], "Transformation function failed."
+        print(f"✅ Transformation complete. Destination table: {test_destination_table}")
+
+        # --- 4. Query and Assert ---
+        query_job = bq_client.query(f"SELECT * FROM `{test_destination_table}`")
+        results_df = query_job.to_dataframe()
+
+        print("\n🔍 Resulting table head:")
+        print(results_df.head().to_string())
+
+        assert len(results_df) > 0, "The destination table is empty."
+        assert len(results_df) <= batch_size, "Table has more rows than expected."
+        print(f"\n✅ Assertions passed: Table contains {len(results_df)} rows.")
+
+    finally:
+        # --- 5. Clean Up ---
+        print("\n🗑️ Cleaning up temporary tables...")
+        bq_client.delete_table(test_source_table, not_found_ok=True)
+        bq_client.delete_table(test_destination_table, not_found_ok=True)
+        print("✅ Cleanup complete.")
+``` 
