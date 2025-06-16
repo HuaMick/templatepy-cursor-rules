@@ -1,5 +1,21 @@
 ---
-description:
-globs:
+description: Creating, updating or actioning a task
+globs: 
 alwaysApply: false
 ---
+## Definition
+
+A task is a specific, actionable item that does not involve creating or updating software components. 
+
+These include:
+- decisions
+- researching
+- project setup
+- installing dependancies
+- defining data schemas or configurations
+
+## Guidelines
+
+- **Separation of Concerns**: Keep tasks separate from the implementation of functions, workflows, classes, and services. A task might be "Define the schema for X," while a separate function/workflow would be "Implement the process that uses the schema for X."
+
+

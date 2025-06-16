@@ -28,5 +28,20 @@ You are a technical writer tasked with breaking down the `milestones.md` into se
 5. Review each tasklist generated or updated, review it and remove any redundancies. For example a function created earlier that can be leveraged in a downstream milestone so it doesnt need to be created again.
 
 ## Guidelines
-*Descriptions should be concise, short and describe how the function is leveraged by the node, or how the node/task helps deliver the milestone.*
-*Create classes sparingly and give strong preference to creating functions instead. Classes should only be created when they provide clear benefits such as encapsulation of related state and behavior, or when implementing interfaces. Favor functional approaches and pure functions where possible.*
+- Avoid adding README.md files, these should be left to the software engineer to explicitly ask for these so as to avoid creating clutter.
+
+- When adding a workflow, consider what actions are required to execute that workflow, then consider if these actions would make good functions.
+
+- For each workflow, add a integration test item to the task list for it.  
+
+- Descriptions should be concise, short and describe how the function is leveraged by the workflow, or how the workflow/task helps deliver the milestone.
+
+- Create classes sparingly and give strong preference to creating functions instead. Classes should only be created when they provide clear benefits such as encapsulation of related state and behavior, or when implementing interfaces. Favor functional approaches and pure functions where possible.
+
+
+
+
+
+
+
+
