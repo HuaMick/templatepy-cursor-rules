@@ -1,5 +1,15 @@
 ---
-description:
-globs:
+description: When created or updating shell scripts
+globs: 
 alwaysApply: false
 ---
+- All scripts should be designed to be run from the project root directory.
+
+## Shell Scripts that execute workflows
+- Please follow the patterns in @example_workflow_script.sh.
+
+## Shell Scripts that execute tests
+- Please follow the patterns in @example_test_integration.sh.
+- Shell scripts that use pytest should not need to modify the PYTHONPATH they simply runs the test using python -m pytest from the project root.
+
+- After creating a shell script you should grant permission to run the shell script. e.g. `chmod +x scripts/*.sh`
