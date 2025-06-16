@@ -6,12 +6,12 @@ alwaysApply: false
 
 ### Testing BigQuery Table Transformations
 
-When testing functions or nodes that transform data from one BigQuery table to another, it's crucial to create a controlled and isolated test environment. This ensures tests are deterministic, fast, and don't pollute your development or production datasets.
+When testing functions or workflows that transform data from one BigQuery table to another, it's crucial to create a controlled and isolated test environment. This ensures tests are deterministic, fast, and don't pollute your development or production datasets.
 
 The standard pattern for this is as follows:
 
 1.  **Create a Temporary Source Table**: Instead of running against a full production table, create a small, temporary source table containing only the data needed for the test. This is typically done by selecting a limited number of rows (e.g., 10-20) from the real source table that match the specific conditions (`predicates`) of your test.
-2.  **Execute the Transformation**: Run your function or node, pointing it to the temporary source table you just created. Configure it to write its output to a new, temporary destination table.
+2.  **Execute the Transformation**: Run your function or workflow, pointing it to the temporary source table you just created. Configure it to write its output to a new, temporary destination table.
 3.  **Query and Assert**: After the transformation is complete, query the temporary destination table. Perform assertions on the results to verify the transformation worked as expected. This can include checking the number of rows, validating calculations, or confirming schema changes. Print the head of the resulting table to the console for easy debugging.
 4.  **Clean Up**: Use a `try...finally` block to ensure that both the temporary source and destination tables are deleted after the test runs, regardless of whether it passed or failed.
 
