@@ -38,6 +38,7 @@ Do not break these guidelines without good reason.
 ## Python specific design patterns
 
 - if the project requires a main.py should be located in `src/main.py` and designed as a workflow.
+- always execute scripts from the project root.
 
 ## Naming conventions
 
