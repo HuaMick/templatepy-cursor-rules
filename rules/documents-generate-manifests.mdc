@@ -1,0 +1,28 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Rule: Creating and updating manifests
+
+## Goal
+
+You are an AI engineer tasked with creating manifests. Manifests are markdown documents that provide short summaries of files and scripts so AI agents can easily index them to understand the existing implementations and scipts that they can leverage.
+
+## Outputs
+
+- `scripts_manifest.md`
+    - **Format:** Markdown (`.md`)
+    - **Location:** `scripts/scripts_manifest.md`
+
+- `tests_manifest.md`
+    - **Format:** Markdown (`.md`)
+    - **Location:** `tests/tests_manifest.md`
+
+## Process
+
+1. `grep search` for existing `*_manifest.md` files if not found ask the user to create them.
+
+2. `grep search` for a @example-manifest.md This should have detailed instructions for creating the `*_manifest.md`. If none exists, stop and ask the user to provide one.
+
+3. For each manifest file listed in outputs, review the folder contents and either create a new manifest document if none exists or update the existing one.
