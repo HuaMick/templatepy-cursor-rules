@@ -14,7 +14,7 @@ set -e
 # The Python script to be executed.
 # In a real-world scenario, this would likely be a workflow or utility script
 # located in the `src` directory.
-PYTHON_SCRIPT_TO_RUN=".cursor/examples/example_target_script.py"
+PYTHON_SCRIPT_TO_RUN=".cursor/examples/example-target-script.py"
 
 # Default values for arguments that will be passed to the Python script.
 DEFAULT_ARG_VALUE="default-from-shell"
