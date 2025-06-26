@@ -19,7 +19,7 @@ Do not break these guidelines without good reason.
 
 - FOLLOW EXISTING PATTERNS: When creating new files always search for an existing example to follow.
 
-- CHECK FOR SCRIPTS: Always check the [scripts_manifest.md](mdc:scripts/scripts_manifest.md) for an existing shell script that can be leveraged.
+- CHECK FOR SCRIPTS: Always check the [scripts-manifest.md](mdc:scripts/scripts-manifest.md) for an existing shell script that can be leveraged.
 
 ## Definitions and Design Patterns
 
@@ -39,5 +39,8 @@ Do not break these guidelines without good reason.
 
 - if the project requires a main.py should be located in `src/main.py` and designed as a workflow.
 
+## Naming conventions
+
+- Use snake_case for code and script file names (e.g., my_script.py). For documentation and example files, you may use kebab-case (e.g., example-document.md).
 
 
